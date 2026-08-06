@@ -220,6 +220,27 @@ main {
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
+.navbar-brand.brand-mark {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  padding-block: 0.15rem;
+  font-size: 1.35rem;
+  letter-spacing: 0.01em;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand-mark__lto {
+  font-weight: 700;
+  color: #fff;
+}
+
+.brand-mark__dev {
+  font-weight: 600;
+  color: var(--accent-2);
+}
+
 .section {
   padding: 72px 0;
 }
@@ -232,6 +253,29 @@ section[id] {
 .hero {
   padding-top: 80px;
   padding-bottom: 72px;
+}
+
+.hero h1 {
+  color: rgba(255, 255, 255, 0.98);
+  text-shadow: 0 8px 28px rgba(3, 7, 18, 0.35);
+}
+
+.hero-lead {
+  color: rgba(255, 255, 255, 0.94) !important;
+  max-width: 860px;
+  line-height: 1.65;
+  font-weight: 400;
+  text-shadow: 0 4px 18px rgba(3, 7, 18, 0.22);
+}
+
+.hero .container,
+.section .container,
+.card-surface,
+.mini-card,
+.project-media-wrap,
+.chip,
+.btn {
+  will-change: transform, opacity;
 }
 
 .text-accent {
@@ -262,6 +306,8 @@ section[id] {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: 16px;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .card-surface:hover {
@@ -341,7 +387,7 @@ section[id] {
 
 .project-media-wrap {
   border-bottom: 1px solid var(--border);
-  background: rgba(255, 255, 255, 0.03);
+  background: transparent;
   border-top-left-radius: 16px;
   border-top-right-radius: 16px;
   overflow: hidden;
@@ -352,6 +398,48 @@ section[id] {
   height: 170px;
   object-fit: cover;
   display: block;
+}
+
+.project-media-logo {
+  object-fit: contain;
+  padding: 1.35rem 1.5rem;
+  background: transparent;
+}
+
+.project-media-logo--lg {
+  height: 220px;
+  padding: 0.9rem 1rem;
+  transform: scale(1.08);
+  transform-origin: center;
+}
+
+.project-card--historyai .project-media-wrap {
+  background: linear-gradient(160deg, #0b0b0d 0%, #17120a 55%, #0c0c10 100%);
+  border-bottom-color: rgba(212, 175, 55, 0.18);
+}
+
+.project-card--clinicy .project-media-wrap {
+  background:
+    radial-gradient(circle at 50% 28%, rgba(255, 255, 255, 0.98) 0%, rgba(244, 253, 250, 0.96) 18%, rgba(209, 243, 234, 0.9) 42%, rgba(165, 223, 209, 0.78) 70%, rgba(120, 198, 181, 0.68) 100%),
+    linear-gradient(180deg, #fafffe 0%, #e8f8f3 48%, #b7e3d7 100%);
+  border-bottom-color: rgba(45, 168, 150, 0.28);
+}
+
+.project-card--clinicy .project-media-logo {
+  height: 210px;
+  padding: 0.35rem;
+  transform: scale(1.16);
+  transform-origin: center;
+}
+
+.project-card--imsa .project-media-wrap {
+  background: linear-gradient(160deg, #ffffff 0%, #f4f4f5 55%, #ebebec 100%);
+  border-bottom-color: rgba(220, 38, 38, 0.22);
+}
+
+.project-card--wec .project-media-wrap {
+  background: linear-gradient(160deg, #ffffff 0%, #eef8fb 50%, #d9f0f7 100%);
+  border-bottom-color: rgba(14, 165, 200, 0.28);
 }
 
 .course-media {
@@ -394,5 +482,25 @@ section[id] {
   }
   .hero {
     padding-top: 56px;
+  }
+
+  .navbar-brand.brand-mark {
+    font-size: 1.2rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-flow .bubble {
+    animation: none;
+  }
+
+  .hero .container,
+  .section .container,
+  .card-surface,
+  .mini-card,
+  .project-media-wrap,
+  .chip,
+  .btn {
+    will-change: auto;
   }
 }

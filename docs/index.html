@@ -50,7 +50,9 @@
 
     <nav id="topNav" class="navbar navbar-expand-lg navbar-dark fixed-top nav-blur">
       <div class="container">
-        <a class="navbar-brand fw-semibold" href="./index.html#home">LTODEV</a>
+        <a class="navbar-brand brand-mark" href="./index.html#home" aria-label="LTODEV - voltar ao topo">
+          <span class="brand-mark__lto">LTO</span><span class="brand-mark__dev">Dev</span>
+        </a>
 
         <button
           class="navbar-toggler"
@@ -83,7 +85,7 @@
           <div class="row align-items-center gy-4">
             <div class="col-lg-8">
               <h1 class="display-5 fw-bold mb-3">Lorenzo Tacca Orssatto</h1>
-              <p class="lead text-secondary-emphasis mb-4">
+              <p class="lead hero-lead mb-4">
                 Profissional em formação, com perfil colaborativo e foco em gerar valor para cada entrega.
                 Busco evoluir continuamente, assumindo responsabilidades e contribuindo com soluções que impactem pessoas e negócios.
               </p>
@@ -347,141 +349,151 @@
 
           <div id="projectsGrid" class="row g-3">
             <div class="col-md-6">
-              <article class="card card-surface h-100">
+              <article class="card card-surface h-100 project-card project-card--historyai">
                 <div class="project-media-wrap">
                   <img
-                    class="project-media"
-                    src="https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=1400&q=80"
-                    alt="Smartphone com aplicativo Android em destaque"
+                    class="project-media project-media-logo project-media-logo--lg"
+                    src="./assets/projects/historyai.png?v=2"
+                    alt="Logo do HistoryAI"
                     loading="lazy"
                   />
                 </div>
                 <div class="card-body">
                   <div class="d-flex align-items-start justify-content-between gap-3">
                     <div>
-                      <h3 class="h5 mb-1">LibaryKotlin</h3>
-                      <p class="text-body-secondary mb-3">Kotlin • Android • Retrofit • Room • Glide</p>
+                      <h3 class="h5 mb-1">HistoryAI</h3>
+                      <p class="text-body-secondary mb-3">React • IA • História alternativa</p>
                     </div>
-                    <span class="badge text-bg-secondary">Mobile</span>
+                    <span class="badge text-bg-secondary">Web</span>
                   </div>
                   <div class="project-details">
                     <p class="mb-0">
-                      Aplicação mobile Android desenvolvida com Kotlin, integrando a Google Books API via Retrofit,
-                      armazenamento local com Room (SQLite), carregamento de imagens com Glide, ViewBinding e LiveData.
+                      Plataforma interativa que explora cenários históricos alternativos com inteligência artificial —
+                      e se a história tivesse sido diferente?
                     </p>
                   </div>
                 </div>
                 <div class="card-footer border-0 bg-transparent pt-0">
                   <a
                     class="btn btn-sm btn-outline-light"
-                    href="https://github.com/SenhorLo/LibaryKotlin"
+                    href="https://historyai-97ze.onrender.com/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Ver repositório
+                    Ver aplicação
                   </a>
                 </div>
               </article>
             </div>
 
             <div class="col-md-6">
-              <article class="card card-surface h-100">
+              <article class="card card-surface h-100 project-card project-card--clinicy">
                 <div class="project-media-wrap">
                   <img
-                    class="project-media"
-                    src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1400&q=80"
-                    alt="Dashboard com graficos e indicadores de dados"
+                    class="project-media project-media-logo"
+                    src="./assets/projects/clinicy.png?v=2"
+                    alt="Logo do Clinicy"
                     loading="lazy"
                   />
                 </div>
                 <div class="card-body">
                   <div class="d-flex align-items-start justify-content-between gap-3">
                     <div>
-                      <h3 class="h5 mb-1">PowerBICars</h3>
-                      <p class="text-body-secondary mb-3">Chart.js • BI Dashboard • ETL Python • Data Warehouse</p>
+                      <h3 class="h5 mb-1">Clinicy</h3>
+                      <p class="text-body-secondary mb-3">Next.js • Stripe • Agenda inteligente</p>
                     </div>
-                    <span class="badge text-bg-secondary">Dados</span>
+                    <span class="badge text-bg-secondary">SaaS</span>
                   </div>
                   <div class="project-details">
                     <p class="mb-0">
-                      Dashboard de BI feito com Chart.js para visualização de base de carros (preço, combustível e potência),
-                      acompanhado de um ETL em Python para integração de dados em um Data Warehouse.
+                      Agenda inteligente para consultórios com feriados nacionais, estaduais e municipais aplicados
+                      automaticamente, grade por profissional e gestão de múltiplas unidades.
                     </p>
                   </div>
                 </div>
                 <div class="card-footer border-0 bg-transparent pt-0">
                   <a
                     class="btn btn-sm btn-outline-light"
-                    href="https://github.com/SenhorLo/PowerBICars"
+                    href="https://clinicy-theta.vercel.app/"
                     target="_blank"
                     rel="noreferrer"
                   >
-                    Ver repositório
+                    Ver aplicação
                   </a>
                 </div>
               </article>
             </div>
 
             <div class="col-md-6">
-              <article class="card card-surface h-100">
-                <div class="project-media-wrap project-media-placeholder" role="img" aria-label="AIMBOT">
-                  <span>AIMBOT</span>
-                </div>
-                <div class="card-body">
-                  <div class="d-flex align-items-start justify-content-between gap-3">
-                    <div>
-                      <h3 class="h5 mb-1">AIMBOTCSGO</h3>
-                      <p class="text-body-secondary mb-3">C++ • Counter-Strike Legacy • manipulação de memória</p>
-                    </div>
-                    <span class="badge text-bg-secondary">C++</span>
-                  </div>
-                  <div class="project-details">
-                    <p class="mb-0">
-                      Projeto de aimbot para a versão Legacy do Counter-Strike, criado para aprendizado sobre alteração
-                      de dados em memória e conceitos de baixo nível com C++.
-                    </p>
-                  </div>
-                </div>
-                <div class="card-footer border-0 bg-transparent pt-0">
-                  <a
-                    class="btn btn-sm btn-outline-light"
-                    href="https://github.com/SenhorLo/AIMBOTCSGO"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    Ver repositório
-                  </a>
-                </div>
-              </article>
-            </div>
-
-            <div class="col-md-6">
-              <article class="card card-surface h-100">
+              <article class="card card-surface h-100 project-card project-card--imsa">
                 <div class="project-media-wrap">
                   <img
-                    class="project-media"
-                    src="https://imgs.search.brave.com/aBjRo4KGo6O2JcWRkZjZ9iPSLiGt2H-_30BNqXCiwqg/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93YWxs/cGFwZXJjYXZlLmNv/bS93cC93cDE0NTY2/MzUxLmpwZw"
-                    alt="Carro de corrida em pista de simulacao"
+                    class="project-media project-media-logo"
+                    src="./assets/projects/imsa-hub.png?v=2"
+                    alt="Logo da IMSA"
                     loading="lazy"
                   />
                 </div>
                 <div class="card-body">
                   <div class="d-flex align-items-start justify-content-between gap-3">
                     <div>
-                      <h3 class="h5 mb-1">FreeloRacing</h3>
-                      <p class="text-body-secondary mb-3">Lovable • Supabase • TypeScript • React</p>
+                      <h3 class="h5 mb-1">IMSA Fan Hub</h3>
+                      <p class="text-body-secondary mb-3">HTML • CSS • JavaScript • Endurance</p>
                     </div>
-                    <span class="badge text-bg-secondary">Marketplace</span>
+                    <span class="badge text-bg-secondary">Fan site</span>
                   </div>
                   <div class="project-details">
                     <p class="mb-0">
-                      Marketplace para freelancers de corrida em simulador e real. Desenvolvido com Lovable e utilizando
-                      Supabase, TypeScript e React para gestão de perfis, anúncios e comunicação entre usuários.
+                      Fan hub não-oficial do WeatherTech SportsCar Championship 2026: classes, grid, calendário,
+                      sistema de pontuação, BoP e regras de Safety Car explicadas de forma visual.
                     </p>
                   </div>
                 </div>
                 <div class="card-footer border-0 bg-transparent pt-0">
-                  <a class="btn btn-sm btn-outline-light" href="https://freeloracing.lovable.app" target="_blank" rel="noreferrer">
+                  <a
+                    class="btn btn-sm btn-outline-light"
+                    href="https://senhorlo.github.io/IMSAfanHub/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Ver aplicação
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="col-md-6">
+              <article class="card card-surface h-100 project-card project-card--wec">
+                <div class="project-media-wrap">
+                  <img
+                    class="project-media project-media-logo"
+                    src="./assets/projects/fia-wec-hub.png?v=2"
+                    alt="Logo do FIA World Endurance Championship"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="card-body">
+                  <div class="d-flex align-items-start justify-content-between gap-3">
+                    <div>
+                      <h3 class="h5 mb-1">FIA WEC Fan Hub</h3>
+                      <p class="text-body-secondary mb-3">HTML • CSS • JavaScript • Endurance</p>
+                    </div>
+                    <span class="badge text-bg-secondary">Fan site</span>
+                  </div>
+                  <div class="project-details">
+                    <p class="mb-0">
+                      Fan hub do FIA World Endurance Championship 2026: Hypercar e LMGT3, calendário global,
+                      contagem regressiva e seção dedicada às 24 Horas de Le Mans.
+                    </p>
+                  </div>
+                </div>
+                <div class="card-footer border-0 bg-transparent pt-0">
+                  <a
+                    class="btn btn-sm btn-outline-light"
+                    href="https://senhorlo.github.io/FIAWECHUB/"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
                     Ver aplicação
                   </a>
                 </div>
@@ -605,6 +617,44 @@
                 </div>
               </div>
             </div>
+
+            <div class="col-md-6 col-lg-4 course-item course-extra is-hidden">
+              <div class="card card-surface h-100">
+                <div class="project-media-wrap">
+                  <img
+                    class="course-media"
+                    src="./assets/courses/cursor-2-0.svg"
+                    alt="Ilustração do curso IA para Dev com Cursor 2.0"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="card-body">
+                  <div class="fw-semibold mb-1">IA para Dev: Lidando com projetos prontos com Cursor 2.0</div>
+                  <div class="text-body-secondary">Alura</div>
+                  <div class="text-body-secondary">Carga horária: 2 horas</div>
+                  <div class="text-body-secondary mt-2">Finalizado em 01/07/2026</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6 col-lg-4 course-item course-extra is-hidden">
+              <div class="card card-surface h-100">
+                <div class="project-media-wrap">
+                  <img
+                    class="course-media"
+                    src="./assets/courses/windsurf.svg"
+                    alt="Ilustração do curso IA para Dev com Windsurf"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="card-body">
+                  <div class="fw-semibold mb-1">IA para Dev: Usando o Windsurf para projetos prontos</div>
+                  <div class="text-body-secondary">Alura</div>
+                  <div class="text-body-secondary">Carga horária: 2 horas</div>
+                  <div class="text-body-secondary mt-2">Finalizado em 07/07/2026</div>
+                </div>
+              </div>
+            </div>
           </div>
 
           <div class="mt-3">
@@ -665,6 +715,8 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.7/dist/ScrollTrigger.min.js"></script>
     <script src="./script.js"></script>
   </body>
 </html>
