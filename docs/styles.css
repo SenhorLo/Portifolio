@@ -432,6 +432,15 @@ section[id] {
   transform-origin: center;
 }
 
+.project-card--decorar .project-media-wrap {
+  background: linear-gradient(150deg, #2b1d12 0%, #4a3323 55%, #1a1208 100%);
+  border-bottom-color: rgba(212, 160, 92, 0.28);
+}
+
+.project-card--decorar .project-media-placeholder span {
+  color: #f2dcc0;
+}
+
 .project-card--imsa .project-media-wrap {
   background: linear-gradient(160deg, #ffffff 0%, #f4f4f5 55%, #ebebec 100%);
   border-bottom-color: rgba(220, 38, 38, 0.22);
