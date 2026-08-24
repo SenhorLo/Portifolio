@@ -441,6 +441,16 @@ section[id] {
   color: #f2dcc0;
 }
 
+.project-card--pomoflow .project-media-wrap {
+  background: linear-gradient(150deg, #3b0f12 0%, #7f1d24 55%, #180a0c 100%);
+  border-bottom-color: rgba(248, 113, 113, 0.28);
+}
+
+.project-card--pomoflow .project-media-placeholder span {
+  font-size: 1.55rem;
+  color: #ffe1e1;
+}
+
 .project-card--imsa .project-media-wrap {
   background: linear-gradient(160deg, #ffffff 0%, #f4f4f5 55%, #ebebec 100%);
   border-bottom-color: rgba(220, 38, 38, 0.22);
