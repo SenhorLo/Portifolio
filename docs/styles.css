@@ -451,6 +451,18 @@ section[id] {
   color: #ffe1e1;
 }
 
+.project-card--horizonte .project-media-wrap {
+  background:
+    radial-gradient(circle at 50% 62%, rgba(251, 146, 60, 0.34) 0%, rgba(120, 53, 15, 0.22) 26%, rgba(0, 0, 0, 0) 58%),
+    linear-gradient(150deg, #05060a 0%, #0b0d16 55%, #000000 100%);
+  border-bottom-color: rgba(251, 146, 60, 0.28);
+}
+
+.project-card--horizonte .project-media-placeholder span {
+  font-size: 1.4rem;
+  color: #fde3c2;
+}
+
 .project-card--imsa .project-media-wrap {
   background: linear-gradient(160deg, #ffffff 0%, #f4f4f5 55%, #ebebec 100%);
   border-bottom-color: rgba(220, 38, 38, 0.22);
