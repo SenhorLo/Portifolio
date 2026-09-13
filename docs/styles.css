@@ -463,6 +463,18 @@ section[id] {
   color: #fde3c2;
 }
 
+.project-card--farol .project-media-wrap {
+  background:
+    radial-gradient(circle at 50% 55%, rgba(186, 230, 253, 0.36) 0%, rgba(56, 189, 248, 0.18) 22%, rgba(0, 0, 0, 0) 55%),
+    linear-gradient(150deg, #04070d 0%, #0a1220 55%, #000000 100%);
+  border-bottom-color: rgba(125, 211, 252, 0.28);
+}
+
+.project-card--farol .project-media-placeholder span {
+  font-size: 1.4rem;
+  color: #e0f2fe;
+}
+
 .project-card--imsa .project-media-wrap {
   background: linear-gradient(160deg, #ffffff 0%, #f4f4f5 55%, #ebebec 100%);
   border-bottom-color: rgba(220, 38, 38, 0.22);
