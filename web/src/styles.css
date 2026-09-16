@@ -1,0 +1,247 @@
+@import "tailwindcss";
+
+@theme {
+  --color-void: #04050a;
+  --color-abyss: #080a12;
+  --color-ink: #e9edf6;
+  --color-mist: #9aa3b8;
+  --color-dim: #5d6579;
+  --color-line: rgb(255 255 255 / 0.08);
+  --color-glow: #8fb3ff;
+  --color-glow-2: #c4b5fd;
+  --color-ember: #fb923c;
+
+  --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, "SFMono-Regular", monospace;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-quart: cubic-bezier(0.5, 0, 0.75, 0);
+
+}
+
+/* Cores das nebulosas: registradas para que a troca entre seções seja uma transição suave. */
+@property --neb-a {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #1d2b5c;
+}
+@property --neb-b {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #2a1d52;
+}
+@property --neb-c {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #0f2a3d;
+}
+
+/* Tokens de movimento — uma única escala para o site inteiro. */
+:root {
+  --dur-instant: 120ms;
+  --dur-fast: 200ms;
+  --dur-base: 350ms;
+  --dur-slow: 600ms;
+  color-scheme: dark;
+}
+
+@layer base {
+  html {
+    background: var(--color-void);
+    scroll-padding-top: 5.5rem;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* Sem fundo no body: ele cobriria a camada fixa do cosmos (z-index negativo). */
+  body {
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-optical-sizing: auto;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: rgb(143 179 255 / 0.35);
+    color: #fff;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-glow);
+    outline-offset: 3px;
+    border-radius: 6px;
+  }
+
+  @media (pointer: fine) {
+    html.has-cursor,
+    html.has-cursor * {
+      cursor: none !important;
+    }
+  }
+}
+
+@layer components {
+  .container-x {
+    width: 100%;
+    max-width: 124rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 4.5vw, 6rem);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--color-mist);
+  }
+
+  /* Borda com brilho que segue o cursor (variáveis --mx/--my vindas do JS). */
+  .spotlight {
+    position: relative;
+    isolation: isolate;
+  }
+  .spotlight::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: radial-gradient(
+      420px circle at var(--mx, 50%) var(--my, -20%),
+      rgb(143 179 255 / 0.55),
+      rgb(196 181 253 / 0.18) 35%,
+      transparent 65%
+    );
+    -webkit-mask:
+      linear-gradient(#000 0 0) content-box,
+      linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: var(--spot-o, 0);
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+    pointer-events: none;
+    z-index: 1;
+  }
+  .spotlight::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, -20%), rgb(143 179 255 / 0.07), transparent 45%);
+    opacity: var(--spot-o, 0);
+    transition: opacity var(--dur-base) var(--ease-out-quart);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .spotlight:hover {
+    --spot-o: 1;
+  }
+
+  .panel {
+    border-radius: 1.5rem;
+    background: linear-gradient(180deg, rgb(16 19 31 / 0.82), rgb(10 12 20 / 0.72));
+    box-shadow: inset 0 0 0 1px var(--color-line);
+  }
+
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border-radius: 999px;
+    padding: 0.32rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--color-ink);
+    background: rgb(255 255 255 / 0.04);
+    box-shadow: inset 0 0 0 1px var(--color-line);
+    transition:
+      background var(--dur-fast) ease,
+      box-shadow var(--dur-fast) ease;
+  }
+  .chip:hover {
+    background: rgb(143 179 255 / 0.1);
+    box-shadow: inset 0 0 0 1px rgb(143 179 255 / 0.35);
+  }
+
+  /* Grão de filme: a textura salta de posição em passos, como película. */
+  .grain {
+    pointer-events: none;
+    position: fixed;
+    inset: -50%;
+    z-index: 60;
+    opacity: 0.07;
+    animation: grain 0.9s steps(6) infinite;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .cosmos {
+    transition:
+      --neb-a 1.6s ease,
+      --neb-b 1.6s ease,
+      --neb-c 1.6s ease;
+  }
+  .vignette {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 59;
+    background: radial-gradient(ellipse 120% 90% at 50% 45%, transparent 55%, rgb(0 0 0 / 0.55) 100%);
+  }
+  @keyframes grain {
+    0% { transform: translate(0, 0); }
+    20% { transform: translate(-4%, 3%); }
+    40% { transform: translate(3%, -5%); }
+    60% { transform: translate(-6%, -2%); }
+    80% { transform: translate(5%, 4%); }
+    100% { transform: translate(-2%, 6%); }
+  }
+
+  .cosmos-nebula {
+    background:
+      radial-gradient(50vmax 38vmax at 8% 12%, var(--neb-a), transparent 70%),
+      radial-gradient(46vmax 36vmax at 94% 42%, var(--neb-b), transparent 70%),
+      radial-gradient(64vmax 34vmax at 40% 108%, var(--neb-c), transparent 70%);
+    opacity: 0.6;
+    filter: saturate(0.85);
+    animation: nebula-drift 40s ease-in-out infinite alternate;
+  }
+  .cosmos-dots {
+    background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
+    background-size: 28px 28px;
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 20%, transparent 75%);
+    opacity: 0.6;
+  }
+  @keyframes nebula-drift {
+    to {
+      transform: translate3d(-3%, 2%, 0) scale(1.08);
+    }
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, #ffffff 10%, #c9d8ff 45%, #8fb3ff 70%, #c4b5fd 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .marquee-mask {
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
