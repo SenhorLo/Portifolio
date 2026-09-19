@@ -30,7 +30,7 @@ export default function About() {
         <div className="grid gap-y-10 lg:grid-cols-12 lg:gap-x-10">
           <div className="lg:col-span-3">
             <SectionLabel index="01">Sobre</SectionLabel>
-            <Reveal delay={0.1} className="max-w-[13rem]">
+            <Reveal delay={0.1} className="max-w-[18rem]">
               <figure className="group relative">
                 {/* Anel orbital atrás do retrato. */}
                 <div

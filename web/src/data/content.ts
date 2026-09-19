@@ -175,6 +175,16 @@ export const projects: Project[] = [
     accent: "#7dd3fc",
   },
   {
+    slug: "doctorhouse",
+    name: "House, M.D.",
+    tags: ["React", "GSAP", "Lenis", "Scrollytelling"],
+    category: "Fan site",
+    description:
+      "Homenagem cinematográfica à série House, M.D. (2004–2012): o método do diagnóstico diferencial em seis etapas, fichas da equipe, as oito temporadas e um diagnóstico interativo.",
+    url: "https://doctorhouse-rosy.vercel.app/",
+    accent: "#7fb0d6",
+  },
+  {
     slug: "wec",
     name: "FIA WEC Fan Hub",
     tags: ["HTML", "CSS", "JavaScript", "Endurance"],
