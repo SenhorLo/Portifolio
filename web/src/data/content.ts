@@ -185,6 +185,16 @@ export const projects: Project[] = [
     accent: "#7fb0d6",
   },
   {
+    slug: "colapso",
+    name: "Colapso",
+    tags: ["React", "Vite", "WebGL", "Scrollytelling"],
+    category: "Divulgação científica",
+    description:
+      "Atlas interativo do último segundo de uma estrela massiva: dez capítulos que vão do registro histórico das supernovas às camadas do núcleo, ao colapso em dez segundos, aos neutrinos e aos elementos que sobraram.",
+    url: "https://supernova-eight-rouge.vercel.app/",
+    accent: "#f97b45",
+  },
+  {
     slug: "wec",
     name: "FIA WEC Fan Hub",
     tags: ["HTML", "CSS", "JavaScript", "Endurance"],
