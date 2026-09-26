@@ -195,6 +195,16 @@ export const projects: Project[] = [
     accent: "#f97b45",
   },
   {
+    slug: "tourbillon",
+    name: "Tourbillon",
+    tags: ["JavaScript", "GSAP", "Lenis", "Scrollytelling"],
+    category: "Conceito",
+    description:
+      "Estudo conceitual de página para o relógio Bugatti Tourbillon da Jacob & Co: o motor V16 em miniatura revelado pelo scroll, as especificações do calibre e a edição limitada a seis peças. Sem vínculo com as marcas.",
+    url: "https://bugatti-clock.vercel.app/",
+    accent: "#2fbd63",
+  },
+  {
     slug: "wec",
     name: "FIA WEC Fan Hub",
     tags: ["HTML", "CSS", "JavaScript", "Endurance"],
