@@ -64,8 +64,8 @@ export default function Cursor() {
             width: ringSize,
             height: ringSize,
             scale: down ? 0.85 : 1,
-            backgroundColor: label ? "rgba(233,237,246,1)" : "rgba(233,237,246,0)",
-            borderColor: label ? "rgba(233,237,246,0)" : hover ? "rgba(143,179,255,.9)" : "rgba(233,237,246,.35)",
+            backgroundColor: label ? "rgba(244,236,246,1)" : "rgba(244,236,246,0)",
+            borderColor: label ? "rgba(244,236,246,0)" : hover ? "rgba(192,91,240,.9)" : "rgba(244,236,246,.35)",
           }}
           style={{ borderWidth: 1, borderStyle: "solid" }}
           transition={{ type: "spring", stiffness: 400, damping: 30 }}

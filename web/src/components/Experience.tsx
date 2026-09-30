@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useSpring } from "motion/react";
 import { jobs, type Job } from "../data/content";
-import { MaskedHeading, Reveal, SectionLabel, Spotlight } from "./fx";
+import { GhostWord, MaskedHeading, Reveal, SectionLabel, Spotlight } from "./fx";
 
 const EASE = [0.16, 1, 0.3, 1] as const;
 const monthIndex = ([y, m]: [number, number]) => y * 12 + (m - 1);
@@ -30,13 +30,14 @@ export default function Experience() {
 
   return (
     <section id="experiencia" className="relative py-24 md:py-32">
-      <div className="container-x grid gap-16 lg:grid-cols-12 lg:gap-x-10">
+      <div className="container-x relative grid gap-16 lg:grid-cols-12 lg:gap-x-10">
+        <GhostWord className="-top-[0.35em] right-0">Carreira</GhostWord>
         <div className="lg:sticky lg:top-28 lg:col-span-5 lg:self-start xl:col-span-4">
           <SectionLabel index="03">Experiência</SectionLabel>
           <MaskedHeading
             text="Onde transformei"
             accent="estudo em entrega."
-            className="text-[clamp(1.9rem,3.2vw,3.25rem)] leading-[1.02] font-medium tracking-[-0.035em]"
+            className="text-[clamp(1.5rem,2.7vw,2.7rem)] leading-[1.12] font-light tracking-[0.05em] uppercase"
           />
           <Reveal delay={0.2} className="mt-6 max-w-sm text-mist">
             Implantação e suporte de sistemas ERP, desenvolvimento web e integrações para processos logísticos.
@@ -70,7 +71,7 @@ export default function Experience() {
                     className="size-1.5 rounded-full bg-glow md:size-2"
                     animate={{
                       scale: on ? 1.4 : 1,
-                      boxShadow: on ? "0 0 16px 4px rgba(143,179,255,.9)" : "0 0 0 0 rgba(143,179,255,0)",
+                      boxShadow: on ? "0 0 16px 4px rgba(192,91,240,.9)" : "0 0 0 0 rgba(192,91,240,0)",
                     }}
                     transition={{ duration: 0.4, ease: EASE }}
                   />
@@ -89,10 +90,10 @@ export default function Experience() {
                         {i === 0 && <span className="chip py-1 text-xs text-mist">Mais recente</span>}
                       </span>
                     </div>
-                    <h3 className="mt-5 text-[clamp(1.4rem,2vw,1.85rem)] leading-none font-medium tracking-[-0.03em]">
+                    <h3 className="mt-5 text-[clamp(1.25rem,1.8vw,1.6rem)] leading-tight font-light tracking-[0.06em] uppercase">
                       {job.company}
                     </h3>
-                    <p className="mt-1.5 font-serif text-lg text-mist italic">{job.role}</p>
+                    <p className="mt-2 text-sm font-light tracking-[0.12em] text-mist uppercase">{job.role}</p>
 
                     <ul className="mt-6 grid gap-2.5 text-[0.92rem]">
                       {job.bullets.map((b) => (

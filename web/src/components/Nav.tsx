@@ -46,7 +46,7 @@ export default function Nav({ onOpenPalette }: { onOpenPalette: () => void }) {
   return (
     <>
       <motion.div
-        className="fixed inset-x-0 top-0 z-50 h-[2px] origin-left bg-gradient-to-r from-glow via-glow-2 to-ember"
+        className="fixed inset-x-0 top-0 z-50 h-[2px] origin-left bg-[linear-gradient(90deg,#7b2bd6,#c05bf0_45%,#f04a86_75%,#cf7450)]"
         style={{ scaleX: progress }}
         aria-hidden="true"
       />
@@ -76,13 +76,13 @@ export default function Nav({ onOpenPalette }: { onOpenPalette: () => void }) {
                     href={`#${s.id}`}
                     aria-current={active === s.id ? "location" : undefined}
                     className={`relative block rounded-full px-3.5 py-1.5 text-[0.8rem] transition-colors duration-200 ${
-                      active === s.id ? "text-void" : "text-mist hover:text-ink"
+                      active === s.id ? "text-white" : "text-mist hover:text-ink"
                     }`}
                   >
                     {active === s.id && (
                       <motion.span
                         layoutId="nav-pill"
-                        className="absolute inset-0 -z-10 rounded-full bg-ink"
+                        className="absolute inset-0 -z-10 rounded-full bg-[linear-gradient(120deg,#7b2bd6,#c05bf0_50%,#f04a86)] shadow-[inset_0_1px_0_rgb(255_255_255/0.35)]"
                         transition={{ type: "spring", stiffness: 380, damping: 32 }}
                       />
                     )}

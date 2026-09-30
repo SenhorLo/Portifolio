@@ -114,7 +114,7 @@ export function MaskedHeading({
           <span key={i}>
             <span aria-hidden="true" className="-mt-[0.14em] -mb-[0.12em] inline-block overflow-hidden pt-[0.14em] pb-[0.12em] align-bottom">
               <motion.span
-                className={`inline-block ${isAccent ? "text-gradient pr-[0.08em] font-serif font-normal italic" : ""}`}
+                className={`inline-block ${isAccent ? "text-gradient pr-[0.08em]" : ""}`}
                 initial={{ y: reduce ? 0 : "105%", opacity: reduce ? 0 : 1 }}
                 whileInView={{ y: "0%", opacity: 1 }}
                 viewport={{ once: true, margin: "0px 0px -10% 0px" }}
@@ -128,6 +128,23 @@ export function MaskedHeading({
         );
       })}
     </h2>
+  );
+}
+
+/** Palavra gigante em contorno, atrás do título da seção. */
+export function GhostWord({ children, className = "" }: { children: ReactNode; className?: string }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.span
+      aria-hidden="true"
+      className={`ghost-word pointer-events-none absolute -z-10 select-none ${className}`}
+      initial={{ opacity: 0, y: reduce ? 0 : 24 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -10% 0px" }}
+      transition={{ duration: reduce ? 0.2 : 1.4, ease: EASE }}
+    >
+      {children}
+    </motion.span>
   );
 }
 
@@ -148,15 +165,18 @@ export function SectionHeader({
   aside,
   children,
   meta,
+  ghost,
 }: {
   index: string;
   label: string;
   aside?: ReactNode;
   children: ReactNode;
   meta?: ReactNode;
+  ghost?: string;
 }) {
   return (
-    <div className="grid gap-y-1 lg:grid-cols-12 lg:gap-x-10">
+    <div className="relative grid gap-y-1 lg:grid-cols-12 lg:gap-x-10">
+      {ghost && <GhostWord className="-top-[0.35em] right-0 lg:-top-[0.45em]">{ghost}</GhostWord>}
       <div className="lg:col-span-3 lg:pt-3">
         <SectionLabel index={index}>{label}</SectionLabel>
         {aside && (

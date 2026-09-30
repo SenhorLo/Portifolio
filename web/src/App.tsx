@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { MotionConfig } from "motion/react";
 import About from "./components/About";
+import BlobLayer from "./components/BlobLayer";
 import CommandPalette from "./components/CommandPalette";
 import Contact from "./components/Contact";
 import Cosmos from "./components/Cosmos";
@@ -26,6 +27,7 @@ export default function App() {
         Pular para o conteúdo
       </a>
       <Cosmos />
+      <BlobLayer />
       <Nav onOpenPalette={() => setPalette(true)} />
       <Hero />
       <main id="conteudo">

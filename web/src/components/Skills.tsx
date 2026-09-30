@@ -1,71 +1,13 @@
-import { useRef } from "react";
-import {
-  motion,
-  useAnimationFrame,
-  useInView,
-  useMotionValue,
-  useReducedMotion,
-  useScroll,
-  useSpring,
-  useTransform,
-  useVelocity,
-} from "motion/react";
+import { useState } from "react";
+import { AnimatePresence, motion } from "motion/react";
 import { skillGroups } from "../data/content";
+import { Plus } from "lucide-react";
 import { skillIcon } from "./icons";
 import { MaskedHeading, Reveal, SectionHeader, Spotlight } from "./fx";
 
-const wrap = (min: number, max: number, v: number) => {
-  const r = max - min;
-  return ((((v - min) % r) + r) % r) + min;
-};
-
-/** Letreiro infinito: anda sozinho e acelera (ou inverte) com a velocidade do scroll. */
-function VelocityMarquee({ items, baseVelocity }: { items: string[]; baseVelocity: number }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const inView = useInView(ref);
-  const reduce = useReducedMotion();
-  const baseX = useMotionValue(0);
-  const { scrollY } = useScroll();
-  const velocity = useSpring(useVelocity(scrollY), { damping: 50, stiffness: 400 });
-  const factor = useTransform(velocity, [-2000, 0, 2000], [-4, 0, 4], { clamp: false });
-  const x = useTransform(baseX, (v) => `${wrap(-50, 0, v)}%`);
-  const direction = useRef(1);
-
-  useAnimationFrame((_, delta) => {
-    if (!inView || reduce) return;
-    const f = factor.get();
-    if (f < 0) direction.current = -1;
-    else if (f > 0) direction.current = 1;
-    const move = direction.current * baseVelocity * (delta / 1000) * (1 + Math.abs(f));
-    baseX.set(baseX.get() + move);
-  });
-
-  const row = items.map((item, i) => (
-    <span key={i} className="flex shrink-0 items-center gap-8 pr-8">
-      <span>{item}</span>
-      <span className="size-2 rounded-full bg-glow/50" aria-hidden="true" />
-    </span>
-  ));
-
-  return (
-    <div ref={ref} className="marquee-mask min-w-0 overflow-hidden" aria-hidden="true">
-      <motion.div
-        style={{ x }}
-        className="flex w-max text-[clamp(1.5rem,3.2vw,3rem)] leading-none font-light tracking-[-0.03em] whitespace-nowrap"
-      >
-        {row}
-        {row}
-      </motion.div>
-    </div>
-  );
-}
-
-// Grid assimétrico: cada linha soma 12 colunas.
-const bentoSpan = ["lg:col-span-5", "lg:col-span-4", "lg:col-span-3", "lg:col-span-3", "lg:col-span-5", "lg:col-span-4"];
-
 export default function Skills() {
   const all = [...new Set(skillGroups.flatMap((g) => g.items))];
-  const half = Math.ceil(all.length / 2);
+  const [open, setOpen] = useState<number | null>(0);
 
   return (
     <section id="habilidades" className="relative py-24 md:py-32">
@@ -73,6 +15,7 @@ export default function Skills() {
         <SectionHeader
           index="02"
           label="Habilidades"
+          ghost="Stack"
           meta={
             <Reveal className="font-mono text-sm text-mist">
               {skillGroups.length} categorias · {all.length} tecnologias e áreas
@@ -82,43 +25,89 @@ export default function Skills() {
           <MaskedHeading
             text="Tecnologias e áreas em que"
             accent="atuo ou estudo."
-            className="max-w-3xl text-[clamp(1.9rem,3.2vw,3.25rem)] leading-[1.02] font-medium tracking-[-0.035em]"
+            className="max-w-3xl text-[clamp(1.5rem,2.7vw,2.7rem)] leading-[1.12] font-light tracking-[0.05em] uppercase"
           />
         </SectionHeader>
       </div>
 
-      <div className="mt-14 grid grid-cols-[minmax(0,1fr)] gap-2 overflow-hidden text-ink/90 md:mt-16">
-        <VelocityMarquee items={all.slice(0, half)} baseVelocity={-2.2} />
-        <div className="min-w-0 text-transparent [-webkit-text-stroke:1px_rgb(255_255_255/0.35)]">
-          <VelocityMarquee items={all.slice(half)} baseVelocity={2.2} />
-        </div>
-      </div>
+      <div className="container-x mt-12 grid gap-8 md:mt-16 lg:grid-cols-12 lg:gap-x-10">
+        {/* Mesma altura do acordeão ao lado: o conteúdo se distribui na vertical. */}
+        <Reveal className="h-full lg:col-span-4 xl:col-span-3">
+          <Spotlight className="panel-iris flex h-full flex-col justify-between p-7">
+            <p className="eyebrow text-white/70">Categorias</p>
+            <p className="mt-6 text-[clamp(3rem,5.5vw,5rem)] leading-none font-medium tracking-[-0.04em] text-white">
+              {String(skillGroups.length).padStart(2, "0")}
+            </p>
+            <p className="mt-6 text-sm leading-relaxed text-white/75">
+              {all.length} tecnologias e áreas entre linguagens, back-end, dados, infraestrutura e ferramentas.
+            </p>
+          </Spotlight>
+        </Reveal>
 
-      <ul className="container-x mt-12 grid gap-3 md:mt-16 md:grid-cols-2 lg:grid-cols-12">
-        {skillGroups.map((g, i) => {
-          const Icon = skillIcon[g.icon];
-          return (
-            <Reveal as="li" key={g.title} delay={(i % 3) * 0.08} className={bentoSpan[i]}>
-              <Spotlight className="panel group h-full p-6">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <Icon className="size-4 text-glow" strokeWidth={1.6} />
-                    <h3 className="text-[0.95rem] font-medium tracking-tight">{g.title}</h3>
-                  </div>
-                  <span className="font-mono text-xs text-dim">{String(g.items.length).padStart(2, "0")}</span>
-                </div>
-                <ul className="mt-5 flex flex-wrap gap-1.5">
-                  {g.items.map((item) => (
-                    <li key={item} className="chip">
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </Spotlight>
-            </Reveal>
-          );
-        })}
-      </ul>
+        {/* Acordeão: uma categoria aberta por vez, sobre painel próprio. */}
+        <Spotlight className="panel p-2 md:p-4 lg:col-span-8 xl:col-span-9 xl:col-start-4">
+          <ul>
+            {skillGroups.map((g, i) => {
+              const Icon = skillIcon[g.icon];
+              const on = open === i;
+              return (
+                <Reveal as="li" key={g.title} delay={(i % 3) * 0.05}>
+                  <h3>
+                    <button
+                      type="button"
+                      onClick={() => setOpen(on ? null : i)}
+                      aria-expanded={on}
+                      aria-controls={`skill-${i}`}
+                      className={`group flex w-full items-center gap-4 px-3 py-4 text-left transition-colors duration-300 md:px-4 ${
+                        i > 0 ? "border-t border-line" : ""
+                      } ${on ? "text-ink" : "text-ink/85 hover:text-ink"}`}
+                    >
+                      <span className="font-mono text-xs text-dim">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <Icon
+                        className={`size-4 shrink-0 transition-colors duration-300 ${on ? "text-glow-2" : "text-glow"}`}
+                        strokeWidth={1.6}
+                      />
+                      <span className="flex-1 text-[clamp(0.95rem,1.2vw,1.1rem)] font-light tracking-[0.08em] uppercase">
+                        {g.title}
+                      </span>
+                      <span className="font-mono text-xs text-dim">
+                        {String(g.items.length).padStart(2, "0")}
+                      </span>
+                      <span className="iris-ring grid size-8 shrink-0 place-items-center rounded-full">
+                        <Plus
+                          className={`size-4 transition-transform duration-500 ease-out-expo ${on ? "rotate-45" : "group-hover:rotate-90"}`}
+                        />
+                      </span>
+                    </button>
+                  </h3>
+                  <AnimatePresence initial={false}>
+                    {on && (
+                      <motion.div
+                        id={`skill-${i}`}
+                        className="overflow-hidden"
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                      >
+                        <ul className="flex flex-wrap gap-1.5 px-3 pb-5 pl-[3.6rem] md:px-4 md:pl-[4.6rem]">
+                          {g.items.map((item) => (
+                            <li key={item} className="chip">
+                              {item}
+                            </li>
+                          ))}
+                        </ul>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </Reveal>
+              );
+            })}
+          </ul>
+        </Spotlight>
+      </div>
     </section>
   );
 }

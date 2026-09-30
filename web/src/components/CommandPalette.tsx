@@ -232,7 +232,7 @@ export default function CommandPalette({ open, onOpenChange }: { open: boolean; 
         {toast && (
           <motion.div
             role="status"
-            className="fixed bottom-6 left-1/2 z-[95] -translate-x-1/2 rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-void"
+            className="fixed bottom-6 left-1/2 z-[95] -translate-x-1/2 rounded-full bg-[linear-gradient(120deg,#7b2bd6,#c05bf0_50%,#f04a86)] px-5 py-2.5 text-sm font-medium text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.35)]"
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 8 }}

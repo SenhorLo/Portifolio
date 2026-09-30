@@ -14,11 +14,11 @@ export default function Education() {
   return (
     <section id="formacao" className="relative py-24 md:py-32">
       <div className="container-x">
-        <SectionHeader index="05" label="Formação">
+        <SectionHeader index="05" label="Formação" ghost="Estudos">
           <MaskedHeading
             text="Formação"
             accent="& cursos."
-            className="text-[clamp(1.9rem,3.2vw,3.25rem)] leading-[1.02] font-medium tracking-[-0.035em]"
+            className="text-[clamp(1.5rem,2.7vw,2.7rem)] leading-[1.12] font-light tracking-[0.05em] uppercase"
           />
         </SectionHeader>
 
@@ -26,17 +26,17 @@ export default function Education() {
           <Reveal className="lg:col-span-5 xl:col-span-4">
             <Spotlight className="panel relative h-full overflow-hidden p-7 md:p-8">
               <div
-                className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-[radial-gradient(circle,rgba(143,179,255,.22),transparent_65%)]"
+                className="pointer-events-none absolute -top-24 -right-24 size-72 rounded-full bg-[radial-gradient(circle,rgba(192,91,240,.24),transparent_65%)]"
                 aria-hidden="true"
               />
               <div className="flex items-center justify-between">
-                <span className="grid size-12 place-items-center rounded-2xl bg-white/[0.04] text-glow ring-1 ring-line ring-inset">
+                <span className="iris-ring grid size-12 place-items-center rounded-2xl text-glow">
                   <GraduationCap className="size-5" strokeWidth={1.6} />
                 </span>
                 <span className="chip text-xs">{degree.status}</span>
               </div>
               <p className="mt-10 eyebrow">{degree.institution}</p>
-              <h3 className="mt-4 text-[clamp(1.3rem,1.8vw,1.7rem)] leading-[1.15] font-medium tracking-[-0.025em]">
+              <h3 className="mt-4 text-[clamp(1.1rem,1.5vw,1.4rem)] leading-[1.25] font-light tracking-[0.05em] uppercase">
                 {degree.title}
               </h3>
               <dl className="mt-10 grid grid-cols-2 gap-6 border-t border-line pt-6 text-sm">

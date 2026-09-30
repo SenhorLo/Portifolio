@@ -1,15 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-void: #04050a;
-  --color-abyss: #080a12;
-  --color-ink: #e9edf6;
-  --color-mist: #9aa3b8;
-  --color-dim: #5d6579;
-  --color-line: rgb(255 255 255 / 0.08);
-  --color-glow: #8fb3ff;
-  --color-glow-2: #c4b5fd;
-  --color-ember: #fb923c;
+  --color-void: #0b0410;
+  --color-abyss: #150a1c;
+  --color-ink: #f4ecf6;
+  --color-mist: #a794b0;
+  --color-dim: #6b5a76;
+  --color-line: rgb(255 255 255 / 0.09);
+  --color-glow: #c05bf0;
+  --color-glow-2: #f04a86;
+  --color-ember: #cf7450;
 
   --font-sans: "Bricolage Grotesque Variable", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
@@ -25,17 +25,17 @@
 @property --neb-a {
   syntax: "<color>";
   inherits: true;
-  initial-value: #1d2b5c;
+  initial-value: #3d1250;
 }
 @property --neb-b {
   syntax: "<color>";
   inherits: true;
-  initial-value: #2a1d52;
+  initial-value: #5c1340;
 }
 @property --neb-c {
   syntax: "<color>";
   inherits: true;
-  initial-value: #0f2a3d;
+  initial-value: #2a0f3a;
 }
 
 /* Tokens de movimento — uma única escala para o site inteiro. */
@@ -66,7 +66,7 @@
   }
 
   ::selection {
-    background: rgb(143 179 255 / 0.35);
+    background: rgb(192 91 240 / 0.4);
     color: #fff;
   }
 
@@ -113,8 +113,8 @@
     padding: 1px;
     background: radial-gradient(
       420px circle at var(--mx, 50%) var(--my, -20%),
-      rgb(143 179 255 / 0.55),
-      rgb(196 181 253 / 0.18) 35%,
+      rgb(192 91 240 / 0.6),
+      rgb(240 74 134 / 0.2) 35%,
       transparent 65%
     );
     -webkit-mask:
@@ -132,7 +132,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, -20%), rgb(143 179 255 / 0.07), transparent 45%);
+    background: radial-gradient(600px circle at var(--mx, 50%) var(--my, -20%), rgb(192 91 240 / 0.09), transparent 45%);
     opacity: var(--spot-o, 0);
     transition: opacity var(--dur-base) var(--ease-out-quart);
     pointer-events: none;
@@ -143,9 +143,59 @@
   }
 
   .panel {
-    border-radius: 1.5rem;
-    background: linear-gradient(180deg, rgb(16 19 31 / 0.82), rgb(10 12 20 / 0.72));
-    box-shadow: inset 0 0 0 1px var(--color-line);
+    position: relative;
+    border-radius: 1.75rem;
+    background:
+      radial-gradient(120% 80% at 12% -10%, rgb(192 91 240 / 0.16), transparent 55%),
+      radial-gradient(90% 70% at 100% 0%, rgb(240 74 134 / 0.1), transparent 60%),
+      linear-gradient(180deg, rgb(32 16 40 / 0.92), rgb(17 8 23 / 0.86));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.07),
+      inset 0 0 0 1px var(--color-line),
+      0 24px 60px -40px rgb(192 91 240 / 0.5);
+  }
+
+  /* Botão iridescente: mesmo verniz do blob. */
+  .btn-iris {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: 999px;
+    padding: 0.5rem 0.5rem 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: #fff;
+    background: linear-gradient(120deg, #7b2bd6 0%, #c05bf0 45%, #f04a86 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.45),
+      inset 0 -8px 20px -10px rgb(0 0 0 / 0.6),
+      0 18px 40px -22px rgb(240 74 134 / 0.9);
+    transition:
+      transform var(--dur-fast) var(--ease-out-quart),
+      box-shadow var(--dur-base) var(--ease-out-quart);
+  }
+  .btn-iris:hover {
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.55),
+      inset 0 -8px 20px -10px rgb(0 0 0 / 0.5),
+      0 22px 50px -20px rgb(240 74 134 / 1);
+  }
+  .btn-iris::after {
+    content: "";
+    position: absolute;
+    inset: 1px 1px 45% 1px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.28), transparent);
+    pointer-events: none;
+  }
+
+  /* Anel gradiente usado em ícones e molduras pequenas. */
+  .iris-ring {
+    background:
+      linear-gradient(180deg, rgb(255 255 255 / 0.06), rgb(255 255 255 / 0.02)) padding-box,
+      linear-gradient(140deg, rgb(192 91 240 / 0.7), rgb(240 74 134 / 0.45), transparent 70%) border-box;
+    border: 1px solid transparent;
   }
 
   .chip {
@@ -156,15 +206,17 @@
     padding: 0.32rem 0.75rem;
     font-size: 0.8rem;
     color: var(--color-ink);
-    background: rgb(255 255 255 / 0.04);
-    box-shadow: inset 0 0 0 1px var(--color-line);
+    background: linear-gradient(180deg, rgb(255 255 255 / 0.07), rgb(255 255 255 / 0.03));
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.08),
+      inset 0 0 0 1px var(--color-line);
     transition:
       background var(--dur-fast) ease,
       box-shadow var(--dur-fast) ease;
   }
   .chip:hover {
-    background: rgb(143 179 255 / 0.1);
-    box-shadow: inset 0 0 0 1px rgb(143 179 255 / 0.35);
+    background: rgb(192 91 240 / 0.12);
+    box-shadow: inset 0 0 0 1px rgb(192 91 240 / 0.4);
   }
 
   /* Grão de filme: a textura salta de posição em passos, como película. */
@@ -209,6 +261,27 @@
     filter: saturate(0.85);
     animation: nebula-drift 40s ease-in-out infinite alternate;
   }
+  .cosmos-blobs {
+    filter: blur(40px);
+    opacity: 0.5;
+  }
+  .cosmos-blob {
+    position: absolute;
+    border-radius: 58% 42% 46% 54% / 52% 48% 52% 48%;
+    mix-blend-mode: screen;
+    animation: blob-morph 26s ease-in-out infinite alternate;
+  }
+  @keyframes blob-morph {
+    50% {
+      border-radius: 44% 56% 62% 38% / 46% 58% 42% 54%;
+      transform: translate3d(2%, -3%, 0) rotate(8deg) scale(1.06);
+    }
+    100% {
+      border-radius: 62% 38% 40% 60% / 60% 42% 58% 40%;
+      transform: translate3d(-3%, 2%, 0) rotate(-6deg) scale(0.96);
+    }
+  }
+
   .cosmos-dots {
     background-image: radial-gradient(rgb(255 255 255 / 0.09) 1px, transparent 1px);
     background-size: 28px 28px;
@@ -222,8 +295,44 @@
     }
   }
 
+  /* Palavra-fantasma: contorno fino, tamanho gigante. */
+  .ghost-word {
+    font-size: clamp(4.5rem, 13vw, 12rem);
+    font-weight: 700;
+    line-height: 0.8;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+    color: transparent;
+    -webkit-text-stroke: 1px rgb(255 255 255 / 0.07);
+  }
+
+  /* Superfície com gradiente do blob, para cards em destaque. */
+  .panel-iris {
+    position: relative;
+    border-radius: 1.75rem;
+    background:
+      radial-gradient(120% 100% at 0% 0%, rgb(240 74 134 / 0.55), transparent 60%),
+      radial-gradient(120% 120% at 100% 20%, rgb(123 43 214 / 0.65), transparent 65%),
+      linear-gradient(160deg, #3d1160 0%, #1b0a28 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.18),
+      inset 0 0 0 1px rgb(255 255 255 / 0.08),
+      0 30px 70px -45px rgb(240 74 134 / 0.8);
+  }
+
+  /* Bloco de destaque em laranja, como o CTA da referência. */
+  .panel-ember {
+    position: relative;
+    border-radius: 1.75rem;
+    color: #1a0703;
+    background: linear-gradient(150deg, #d98560 0%, #c96a46 48%, #a94f31 100%);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.28),
+      0 30px 70px -45px rgb(201 106 70 / 0.8);
+  }
+
   .text-gradient {
-    background: linear-gradient(100deg, #ffffff 10%, #c9d8ff 45%, #8fb3ff 70%, #c4b5fd 100%);
+    background: linear-gradient(100deg, #ffffff 8%, #f3c8ff 38%, #c05bf0 65%, #f04a86 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

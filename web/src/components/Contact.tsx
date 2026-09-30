@@ -87,36 +87,37 @@ export default function Contact() {
   return (
     <section id="contato" className="relative overflow-hidden py-24 md:py-32">
       <div
-        className="pointer-events-none absolute bottom-[-30%] left-1/2 -z-10 h-[80vmin] w-[120vmin] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(closest-side,rgba(143,179,255,.16),rgba(196,181,253,.06)_55%,transparent)]"
+        className="pointer-events-none absolute bottom-[-30%] left-1/2 -z-10 h-[80vmin] w-[120vmin] -translate-x-1/2 rounded-[100%] bg-[radial-gradient(closest-side,rgba(192,91,240,.2),rgba(240,74,134,.08)_55%,transparent)]"
         aria-hidden="true"
       />
       <div className="container-x">
-        <SectionHeader index="06" label="Contato">
+        <SectionHeader index="06" label="Contato" ghost="Contato">
           <MaskedHeading
             text="Vamos"
             accent="conversar?"
-            className="text-[clamp(2.4rem,5.6vw,5.6rem)] leading-[0.95] font-medium tracking-[-0.045em]"
+            className="text-[clamp(1.9rem,4.4vw,4.4rem)] leading-[1.05] font-light tracking-[0.04em] uppercase"
           />
         </SectionHeader>
 
         <div className="mt-12 grid gap-10 lg:mt-16 lg:grid-cols-12 lg:gap-x-10">
-          <div className="lg:col-span-5 xl:col-span-4">
-            <Reveal className="max-w-sm text-mist">{contactBlurb}</Reveal>
+          {/* Bloco laranja: o contato direto, em destaque. */}
+          <Reveal className="panel-ember p-7 md:p-8 lg:col-span-5 xl:col-span-4">
+            <p className="max-w-sm text-[#2a0c05]/85">{contactBlurb}</p>
 
-            <Reveal delay={0.1} className="mt-10">
-              <p className="eyebrow">E-mail</p>
+            <div className="mt-10">
+              <p className="eyebrow text-[#2a0c05]/70">E-mail</p>
               <div className="mt-3 flex flex-wrap items-center gap-3">
                 <a
                   href={`mailto:${profile.email}`}
-                  className="group relative text-[clamp(1.05rem,1.6vw,1.35rem)] tracking-tight break-all"
+                  className="group relative text-[clamp(1rem,1.5vw,1.3rem)] font-light tracking-[0.04em] break-all"
                 >
                   {profile.email}
-                  <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-glow transition-transform duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
+                  <span className="absolute -bottom-1 left-0 h-px w-full origin-right scale-x-0 bg-[#2a0c05] transition-transform duration-500 ease-out-expo group-hover:origin-left group-hover:scale-x-100" />
                 </a>
                 <button
                   type="button"
                   onClick={copyEmail}
-                  className="relative grid size-10 place-items-center overflow-hidden rounded-full text-mist ring-1 ring-line transition-colors ring-inset hover:text-ink"
+                  className="relative grid size-10 place-items-center overflow-hidden rounded-full ring-1 ring-[#2a0c05]/25 transition-colors ring-inset hover:bg-[#2a0c05]/10"
                   aria-label={copied ? "E-mail copiado" : "Copiar e-mail"}
                 >
                   <AnimatePresence mode="wait" initial={false}>
@@ -127,14 +128,14 @@ export default function Contact() {
                       exit={{ y: -14, opacity: 0 }}
                       transition={{ duration: 0.2 }}
                     >
-                      {copied ? <Check className="size-4 text-glow" /> : <Copy className="size-4" />}
+                      {copied ? <Check className="size-4" /> : <Copy className="size-4" />}
                     </motion.span>
                   </AnimatePresence>
                 </button>
                 <AnimatePresence>
                   {copied && (
                     <motion.span
-                      className="font-mono text-xs text-glow"
+                      className="font-mono text-xs"
                       initial={{ opacity: 0, x: -6 }}
                       animate={{ opacity: 1, x: 0 }}
                       exit={{ opacity: 0 }}
@@ -145,36 +146,35 @@ export default function Contact() {
                   )}
                 </AnimatePresence>
               </div>
-            </Reveal>
+            </div>
 
-            <Reveal delay={0.2} className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
+            <div className="mt-10 grid gap-3 sm:grid-cols-2 lg:grid-cols-1 2xl:grid-cols-2">
               {[
                 { href: profile.github, label: "GitHub", sub: profile.githubLabel, Icon: GithubIcon },
                 { href: profile.linkedin, label: "LinkedIn", sub: "Lorenzo Tacca Orssatto", Icon: LinkedinIcon },
               ].map(({ href, label, sub, Icon }) => (
-                <Spotlight
-                  as="a"
+                <a
                   key={label}
                   href={href}
                   target="_blank"
                   rel="noreferrer"
-                  className="panel group flex items-center gap-3.5 p-4 text-sm"
+                  className="group flex items-center gap-3.5 rounded-2xl bg-[#2a0c05]/10 p-4 text-sm ring-1 ring-[#2a0c05]/15 transition-colors ring-inset hover:bg-[#2a0c05]/16"
                 >
                   <Icon className="size-5 shrink-0" />
                   <span className="min-w-0 flex-1">
                     <span className="block font-medium">{label}</span>
-                    <span className="block truncate text-sm text-mist">{sub}</span>
+                    <span className="block truncate text-sm text-[#2a0c05]/70">{sub}</span>
                   </span>
-                  <ArrowUpRight className="size-4 text-mist transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-ink" />
-                </Spotlight>
+                  <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </a>
               ))}
-            </Reveal>
-          </div>
+            </div>
+          </Reveal>
 
           <Reveal delay={0.15} className="lg:col-span-7 xl:col-start-6">
             <Spotlight as="form" noValidate onSubmit={onSubmit} className="panel grid gap-1.5 p-6 md:p-7">
               <div className="mb-4 flex items-baseline justify-between gap-4">
-                <p className="text-base font-medium tracking-tight">Envio de e-mail</p>
+                <p className="text-sm font-light tracking-[0.12em] uppercase">Envio de e-mail</p>
                 <p className="text-sm text-mist">Abre no seu app de e-mail</p>
               </div>
               <div className="grid gap-2 md:grid-cols-2 md:gap-4">
@@ -186,10 +186,10 @@ export default function Contact() {
                 <Magnetic strength={0.2}>
                   <button
                     type="submit"
-                    className="group inline-flex items-center gap-2 rounded-full bg-ink py-2 pr-2 pl-5 text-sm font-medium text-void transition-colors hover:bg-white"
+                    className="btn-iris group"
                   >
                     Enviar e-mail
-                    <span className="grid size-8 place-items-center rounded-full bg-void text-ink transition-transform duration-500 ease-out-expo group-hover:-rotate-12">
+                    <span className="grid size-8 place-items-center rounded-full bg-void/45 text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] transition-transform duration-500 ease-out-expo group-hover:-rotate-12">
                       <Send className="size-3.5" />
                     </span>
                   </button>

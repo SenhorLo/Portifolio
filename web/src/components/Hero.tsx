@@ -1,29 +1,16 @@
-import { lazy, Suspense, useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useMotionValueEvent, useReducedMotion, useScroll, useTransform } from "motion/react";
-import { ArrowDownRight, ArrowUpRight } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { ArrowDownRight } from "lucide-react";
 import { profile } from "../data/content";
-import { GithubIcon, LinkedinIcon } from "./icons";
-import { Magnetic } from "./fx";
-import { useMedia } from "../hooks/useMedia";
 
-const Singularity = lazy(() => import("../three/Singularity"));
 
 const EASE = [0.16, 1, 0.3, 1] as const;
-
-function hasWebGL() {
-  try {
-    const c = document.createElement("canvas");
-    return !!(c.getContext("webgl2") || c.getContext("webgl"));
-  } catch {
-    return false;
-  }
-}
 
 function Letters({ text, delay, className = "" }: { text: string; delay: number; className?: string }) {
   const reduce = useReducedMotion();
   let n = 0;
   return (
-    <span className={`block pb-[0.08em] ${className}`} aria-hidden="true">
+    <span className={`pb-[0.08em] ${className}`} aria-hidden="true">
       {text.split(" ").map((word, w) => (
         <span key={w}>
           <span className="inline-block overflow-hidden whitespace-nowrap pb-[0.08em] align-bottom">
@@ -78,136 +65,61 @@ function RoleTicker() {
 
 export default function Hero() {
   const section = useRef<HTMLElement>(null);
-  const scrollRef = useRef(0);
-  const pointer = useRef({ x: 0, y: 0 });
   const reduce = useReducedMotion();
-  const mobile = useMedia("(max-width: 767px)");
-  const [sceneReady, setSceneReady] = useState(false);
-  const [inView, setInView] = useState(true);
 
   const { scrollYProgress } = useScroll({ target: section, offset: ["start start", "end start"] });
-  useMotionValueEvent(scrollYProgress, "change", (v) => (scrollRef.current = v));
   const contentY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -140]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.7], [1, 0]);
   const sceneScale = useTransform(scrollYProgress, [0, 1], [1, reduce ? 1 : 1.15]);
-
-  // Monta a cena 3D só depois que a página está interativa.
-  useEffect(() => {
-    if (!hasWebGL()) return;
-    const start = () => setSceneReady(true);
-    const w = window as Window & { requestIdleCallback?: (cb: () => void, o?: object) => number };
-    if (w.requestIdleCallback) w.requestIdleCallback(start, { timeout: 1200 });
-    else window.setTimeout(start, 300);
-  }, []);
-
-  useEffect(() => {
-    const el = section.current;
-    if (!el) return;
-    const io = new IntersectionObserver(([e]) => setInView(e.isIntersecting), { threshold: 0 });
-    io.observe(el);
-    const onMove = (e: PointerEvent) => {
-      pointer.current.x = (e.clientX / window.innerWidth) * 2 - 1;
-      pointer.current.y = (e.clientY / window.innerHeight) * 2 - 1;
-    };
-    window.addEventListener("pointermove", onMove, { passive: true });
-    return () => {
-      io.disconnect();
-      window.removeEventListener("pointermove", onMove);
-    };
-  }, []);
 
   return (
     <header ref={section} id="home" className="relative isolate flex min-h-svh flex-col overflow-hidden">
       {/* Fundo: brilho estático (poster) + cena 3D por cima quando carregar. */}
       <motion.div className="absolute inset-0 -z-10" style={{ scale: sceneScale }} aria-hidden="true">
-        <div className="absolute left-1/2 top-[52%] h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(143,179,255,.18),rgba(196,181,253,.06)_40%,transparent_68%)] md:left-[72%]" />
-        <motion.div
-          className="absolute inset-0 md:left-[40%] md:-right-[4%]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: sceneReady ? 1 : 0 }}
-          transition={{ duration: 1.6, ease: "easeOut" }}
+        <div className="absolute left-1/2 top-[52%] h-[70vmin] w-[70vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(192,91,240,.22),rgba(240,74,134,.08)_40%,transparent_68%)] md:left-[30%]" />
+        <svg
+          className="absolute inset-0 size-full text-white/15"
+          viewBox="0 0 1600 900"
+          preserveAspectRatio="xMidYMid slice"
+          fill="none"
         >
-          {sceneReady && (
-            <Suspense fallback={null}>
-              <Singularity scroll={scrollRef} pointer={pointer} mobile={mobile} paused={!!reduce || !inView} />
-            </Suspense>
-          )}
-        </motion.div>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,5,10,.85)_0%,rgba(4,5,10,.55)_32%,transparent_62%)] max-md:bg-[linear-gradient(180deg,rgba(4,5,10,.2)_0%,rgba(4,5,10,.6)_50%,rgba(4,5,10,.2)_100%)]" />
+          <ellipse cx="470" cy="470" rx="620" ry="215" stroke="currentColor" strokeWidth="1" transform="rotate(-14 470 470)" />
+          <ellipse cx="470" cy="470" rx="430" ry="430" stroke="currentColor" strokeWidth="1" opacity=".35" />
+          <ellipse cx="470" cy="470" rx="820" ry="300" stroke="currentColor" strokeWidth="1" opacity=".45" transform="rotate(8 470 470)" />
+        </svg>
+        <div className="absolute inset-0 bg-[linear-gradient(270deg,rgba(11,4,16,.86)_0%,rgba(11,4,16,.45)_42%,transparent_72%)] max-md:bg-[linear-gradient(180deg,rgba(11,4,16,.25)_0%,rgba(11,4,16,.62)_50%,rgba(11,4,16,.25)_100%)]" />
       </motion.div>
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
         className="container-x relative flex flex-1 flex-col justify-center pt-32 pb-24 md:pt-28"
       >
-        <motion.p
-          className="eyebrow mb-8 flex items-center gap-3"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex size-full animate-ping rounded-full bg-glow opacity-60" />
-            <span className="relative inline-flex size-2 rounded-full bg-glow" />
-          </span>
-          Portfólio · {profile.brand.strong}
-          {profile.brand.light}
-        </motion.p>
 
-        <h1
-          aria-label={profile.name}
-          className="max-w-[14ch] text-[clamp(2.6rem,6.6vw,6.4rem)] font-medium leading-[0.92] tracking-[-0.04em]"
-        >
-          <Letters text={profile.firstName} delay={0.15} />
-          <Letters
-            text={profile.lastName}
-            delay={0.45}
-            className="font-serif text-[0.78em] font-normal italic tracking-[-0.02em] text-[#bccdff]"
-          />
-        </h1>
+        {/* Composição: o blob (camada de fundo) à esquerda, o wordmark à direita. */}
+        {/* Par centralizado: espaço reservado ao blob + wordmark, como na referência. */}
+        <div className="flex items-center justify-center gap-[3vw]">
+          <div className="hidden w-[18vw] shrink-0 lg:block" aria-hidden="true" />
 
-        <motion.div
-          className="mt-9 grid max-w-md gap-7"
-          initial={{ opacity: 0, y: reduce ? 0 : 24 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, ease: EASE, delay: 0.9 }}
-        >
-          <p className="text-[0.95rem] leading-relaxed text-mist md:text-base">{profile.lead}</p>
+          <h1 aria-label={`${profile.brand.strong}${profile.brand.light} — ${profile.name}`} className="text-center">
+            <span className="block text-[clamp(3rem,13vw,13rem)] leading-[0.86] tracking-[-0.05em]">
+              <Letters text={profile.brand.strong} delay={0.15} className="inline-block font-semibold" />
+              <Letters
+                text={profile.brand.light}
+                delay={0.35}
+                className="inline-block font-light text-[#e7d3ff]"
+              />
+            </span>
+            <motion.span
+              className="mt-6 block text-[clamp(0.85rem,2.1vw,2.1rem)] font-light tracking-[0.2em] text-ink/85 uppercase"
+              initial={{ opacity: 0, y: reduce ? 0 : 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.7 }}
+            >
+              {profile.name}
+            </motion.span>
+          </h1>
+        </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Magnetic>
-              <a
-                href="#contato"
-                className="group inline-flex items-center gap-2 rounded-full bg-ink py-2 pr-2 pl-5 text-sm font-medium text-void transition-colors duration-200 hover:bg-white"
-              >
-                Fale comigo
-                <span className="grid size-7 place-items-center rounded-full bg-void text-ink transition-transform duration-300 ease-out-expo group-hover:rotate-45">
-                  <ArrowUpRight className="size-3.5" />
-                </span>
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a
-                href={profile.github}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm text-ink ring-1 ring-line transition-colors duration-200 ring-inset hover:bg-white/5 hover:ring-white/20"
-              >
-                <GithubIcon className="size-4" /> GitHub
-              </a>
-            </Magnetic>
-            <Magnetic>
-              <a
-                href={profile.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full px-4 py-2.5 text-sm text-ink ring-1 ring-line transition-colors duration-200 ring-inset hover:bg-white/5 hover:ring-white/20"
-              >
-                <LinkedinIcon className="size-4" /> LinkedIn
-              </a>
-            </Magnetic>
-          </div>
-        </motion.div>
       </motion.div>
 
       <motion.div
