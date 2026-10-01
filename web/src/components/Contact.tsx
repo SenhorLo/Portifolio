@@ -173,7 +173,7 @@ export default function Contact() {
 
           <Reveal delay={0.15} className="lg:col-span-7 xl:col-start-6">
             <Spotlight as="form" noValidate onSubmit={onSubmit} className="panel grid gap-1.5 p-6 md:p-7">
-              <div className="mb-4 flex items-baseline justify-between gap-4">
+              <div className="mb-4 flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
                 <p className="text-sm font-light tracking-[0.12em] uppercase">Envio de e-mail</p>
                 <p className="text-sm text-mist">Abre no seu app de e-mail</p>
               </div>

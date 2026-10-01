@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, type RefObject } from "react";
-import { Canvas, useFrame } from "@react-three/fiber";
+import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import * as THREE from "three";
 
 /**
@@ -179,6 +179,7 @@ const fragment = /* glsl */ `
 function Mass({ progress, pointer, mobile }: SceneProps & { mobile: boolean }) {
   const mesh = useRef<THREE.Mesh>(null);
   const group = useRef<THREE.Group>(null);
+  const { viewport } = useThree();
 
   const material = useMemo(
     () =>
@@ -205,12 +206,17 @@ function Mass({ progress, pointer, mobile }: SceneProps & { mobile: boolean }) {
     g.rotation.z += (tz - g.rotation.z) * 0.04;
 
     // Alvo vindo do percurso + uma flutuação lenta, para nunca ficar parado.
-    const [px, py, ps] = sample(progress.current);
+    const [rawX, py, ps] = sample(progress.current);
+    // Em telas estreitas o deslocamento lateral é reduzido para a massa não sair de cena.
+    const limit = viewport.width / 2;
+    const px = THREE.MathUtils.clamp(rawX * Math.min(1, limit / 4.6), -limit * 0.55, limit * 0.55);
+    // No celular a massa sobe: o texto ocupa o centro da tela.
+    const offsetY = mobile ? 1.35 : 0;
     const floatX = Math.sin(t * 0.16) * 0.22;
     const floatY = Math.sin(t * 0.21 + 1.3) * 0.26;
-    const scale = ps * (mobile ? 0.7 : 1);
+    const scale = ps * (mobile ? 0.62 : 1);
     g.position.x += (px + floatX - g.position.x) * 0.07;
-    g.position.y += (py + floatY - g.position.y) * 0.07;
+    g.position.y += (py + offsetY + floatY - g.position.y) * 0.07;
     g.scale.setScalar(g.scale.x + (scale - g.scale.x) * 0.07);
   });
 

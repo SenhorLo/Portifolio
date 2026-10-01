@@ -22,14 +22,17 @@ export default function BlobLayer() {
   const progress = useRef(0);
   const pointer = useRef({ x: 0, y: 0 });
   const reduce = useReducedMotion();
-  const mobile = useMedia("(max-width: 767px)");
+  // Até 1024px o layout é de uma coluna: a massa sobe e fica menor.
+  const mobile = useMedia("(max-width: 1023px)");
   const [ready, setReady] = useState(false);
   const [hidden, setHidden] = useState(false);
 
   const { scrollYProgress } = useScroll();
   useMotionValueEvent(scrollYProgress, "change", (v) => (progress.current = v));
-  // Forte no hero, discreto no resto da página.
-  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.22, 0.9, 1], [1, 0.8, 0.45, 0.45, 0.85]);
+  // Forte no hero, discreto no resto da página — e ainda mais discreto no celular,
+  // onde a massa passa por trás do texto.
+  const rest = mobile ? 0.28 : 0.45;
+  const opacity = useTransform(scrollYProgress, [0, 0.1, 0.22, 0.9, 1], [1, mobile ? 0.7 : 0.8, rest, rest, mobile ? 0.6 : 0.85]);
 
   useEffect(() => {
     if (!hasWebGL()) return;

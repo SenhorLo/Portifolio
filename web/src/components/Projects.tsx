@@ -9,7 +9,7 @@ function Cover({ p }: { p: Project }) {
   const host = new URL(p.url).host;
   return (
     <div
-      className="relative overflow-hidden rounded-[1.1rem] bg-abyss ring-1 ring-white/10"
+      className="relative w-full min-w-0 overflow-hidden rounded-[1.1rem] bg-abyss ring-1 ring-white/10"
       style={{ boxShadow: `0 30px 80px -40px ${p.accent}66` }}
     >
       <div className="flex items-center gap-3 border-b border-white/[0.06] bg-white/[0.03] px-3.5 py-2.5">
@@ -64,7 +64,7 @@ function ProjectCard({ p, index, total }: { p: Project; index: number; total: nu
   return (
     <motion.article
       onPointerMove={onMove}
-      className="spotlight panel group relative flex h-full flex-col p-3"
+      className="spotlight panel group relative flex h-full w-full min-w-0 flex-col p-3"
       data-cursor="Abrir"
     >
       <motion.div className="pointer-events-none absolute inset-0 rounded-[inherit]" style={{ background: glare }} />
@@ -137,7 +137,7 @@ export default function Projects() {
 
         <ul className="mt-12 grid gap-5 sm:grid-cols-2 md:mt-16 lg:grid-cols-3">
           {projects.map((p, i) => (
-            <Reveal as="li" key={p.slug} delay={(i % 3) * 0.08}>
+            <Reveal as="li" key={p.slug} delay={(i % 3) * 0.08} className="min-w-0">
               <ProjectCard p={p} index={i} total={projects.length} />
             </Reveal>
           ))}

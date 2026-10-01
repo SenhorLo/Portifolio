@@ -97,7 +97,7 @@ export default function Nav({ onOpenPalette }: { onOpenPalette: () => void }) {
             <button
               type="button"
               onClick={onOpenPalette}
-              className="hidden items-center gap-2 rounded-full py-2 pr-2 pl-4 text-sm text-mist ring-1 ring-line transition-colors ring-inset hover:text-ink hover:ring-white/20 md:flex"
+              className="hidden items-center gap-2 rounded-full py-2 pr-2 pl-4 text-sm text-mist ring-1 ring-line transition-colors ring-inset hover:text-ink hover:ring-white/20 lg:flex"
             >
               Navegar
               <kbd className="flex items-center gap-0.5 rounded-full bg-white/5 px-2 py-0.5 font-mono text-[0.7rem]">
