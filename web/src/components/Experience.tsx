@@ -40,7 +40,7 @@ export default function Experience() {
             className="text-[clamp(1.5rem,2.7vw,2.7rem)] leading-[1.12] font-light tracking-[0.05em] uppercase"
           />
           <Reveal delay={0.2} className="mt-6 max-w-sm text-mist">
-            Implantação e suporte de sistemas ERP, desenvolvimento web e integrações para processos logísticos.
+            Implantação e suporte de sistemas ERP, desenvolvimento web, integrações para processos logísticos e análise de dados.
           </Reveal>
         </div>
 

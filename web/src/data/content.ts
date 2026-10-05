@@ -66,6 +66,19 @@ export type Job = {
 // Ordem cronológica inversa: o mais recente primeiro.
 export const jobs: Job[] = [
   {
+    company: "Universidade de Passo Fundo",
+    role: "Estágio em análise de dados",
+    period: "Agosto → Dezembro / 2026",
+    start: [2026, 8],
+    end: [2026, 12],
+    bullets: [
+      "Coleta e tratamento de dados para a Plataforma ON, em colaboração com a Comung.",
+      "Inserção e manutenção dos dados no site da plataforma.",
+      "Validação de funcionalidades da plataforma e levantamento de pontos de melhoria.",
+    ],
+    stack: ["Análise de dados", "Coleta de dados", "Validação"],
+  },
+  {
     company: "Ialum",
     role: "Desenvolvedor FullStack",
     period: "Fevereiro → Maio / 2026",
